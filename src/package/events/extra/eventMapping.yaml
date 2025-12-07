@@ -1,0 +1,5 @@
+haptics:
+  notificationReceived:
+    DEFAULT: knock
+    MX Master 4: ringing
+

@@ -1,0 +1,5 @@
+events:
+  - name: notificationReceived
+    displayName: Notification Received
+    description: Triggered when a macOS notification is received
+
