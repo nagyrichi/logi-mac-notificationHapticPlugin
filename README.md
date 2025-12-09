@@ -19,10 +19,15 @@ A Logi Options+ plugin that provides haptic feedback to Logitech mice (such as M
 
 ### Installation Steps
 
-1. Download the `NotificationHaptic.lplug4` file
-2. **Double-click** the file
-3. Logi Options+ will automatically open and install the plugin
-4. Restart Logi Options+
+1. Download the `NotificationHaptic.lplug4` file.
+2. **Double-click** the file.
+3. Logi Options+ will open.
+4. **Important**: You must finalize the installation manually:
+   - Go to your device settings (e.g., MX Master 4).
+   - Click on **"Smart Actions"** or **"Plugins"** in the sidebar.
+   - Click **"INSTALL AND UNINSTALL PLUGINS"** (or Manage Plugins).
+   - You should see a confirmation message that "NotificationHaptic" is installed.
+5. The plugin is now active!
 
 Or install manually:
 
