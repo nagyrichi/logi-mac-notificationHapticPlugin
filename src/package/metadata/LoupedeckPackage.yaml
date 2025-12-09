@@ -40,10 +40,10 @@ copyright: Copyright © 2025 hyunjun.kim. All rights reserved.
 pluginFolderMac: bin
 
 # List of devices the plugin is optimized for.
-supportedDevices:
+supportedDevices: []
     # LoupedeckCtFamily covers the following devices: Loupedeck CT, Live and Live S,
     # Razer Stream Controller, and Razer Stream Controller X.
-    - LoupedeckCtFamily
+    #- LoupedeckCtFamily
 
     # LoupedeckPlusFamily covers Loupedeck+ device. Uncomment the following line to support Loupedeck+.
     #- LoupedeckPlusFamily
