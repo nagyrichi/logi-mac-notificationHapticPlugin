@@ -1,17 +1,18 @@
 {
   "version": "2.0.0",
   "tasks": [
+    // Plugin tasks
     {
-      "label": "Build (Debug)",
+      "label": "Build Plugin (Debug)",
       "type": "shell",
-      "command": "dotnet build -c Debug",
+      "command": "dotnet build NotificationHapticPlugin/NotificationHapticPlugin.csproj -c Debug",
       "group": "build",
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "Build (Release)",
+      "label": "Build Plugin (Release)",
       "type": "shell",
-      "command": "dotnet build -c Release",
+      "command": "dotnet build NotificationHapticPlugin/NotificationHapticPlugin.csproj -c Release",
       "group": "build",
       "problemMatcher": "$msCompile"
     },
@@ -34,6 +35,75 @@
       "type": "shell",
       "command": "logiplugintool uninstall NotificationHaptic",
       "group": "none",
+      "problemMatcher": []
+    },
+    // NotificationWatcher tasks
+    {
+      "label": "Build NotificationWatcher (Debug)",
+      "type": "shell",
+      "command": "dotnet build NotificationWatcher/NotificationWatcher.csproj -c Debug",
+      "group": "build",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Build NotificationWatcher (Release)",
+      "type": "shell",
+      "command": "dotnet build NotificationWatcher/NotificationWatcher.csproj -c Release",
+      "group": "build",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Run NotificationWatcher (Debug)",
+      "type": "shell",
+      "command": "dotnet run --project NotificationWatcher/NotificationWatcher.csproj -c Debug",
+      "group": "none",
+      "problemMatcher": "$msCompile",
+      "isBackground": true
+    },
+    {
+      "label": "Run NotificationWatcher (Release)",
+      "type": "shell",
+      "command": "${workspaceFolder}/NotificationWatcher/bin/Release/net8.0-windows10.0.19041.0/NotificationWatcher.exe",
+      "group": "none",
+      "problemMatcher": [],
+      "isBackground": true,
+      "dependsOn": "Build NotificationWatcher (Release)"
+    },
+    // Combined build tasks
+    {
+      "label": "Build All (Release)",
+      "dependsOn": [
+        "Build Plugin (Release)",
+        "Build NotificationWatcher (Release)"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Copy Release Files",
+      "type": "shell",
+      "command": "Remove-Item -Path Release/* -Recurse -Force -ErrorAction SilentlyContinue; Copy-Item -Path 'bin/Release/*' -Destination 'Release/' -Recurse -Force; Copy-Item -Path 'NotificationWatcher/bin/Release/net8.0-windows10.0.19041.0/NotificationWatcher.exe' -Destination 'Release/' -Force; Write-Host 'Release files copied to Release/ folder'",
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "label": "Clean",
+      "type": "shell",
+      "command": "Remove-Item -Path 'NotificationHapticPlugin/bin','NotificationHapticPlugin/obj','NotificationWatcher/bin','NotificationWatcher/obj','bin','obj','Release' -Recurse -Force -ErrorAction SilentlyContinue; Write-Host 'Clean completed'",
+      "group": "none",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build and Package Release",
+      "dependsOn": [
+        "Build All (Release)",
+        "Copy Release Files"
+      ],
+      "dependsOrder": "sequence",
+      "group": "build",
       "problemMatcher": []
     }
   ]
